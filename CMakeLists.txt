@@ -24,7 +24,7 @@ if(POLICY CMP0074)
 endif()
 
 set(languages CXX)
-set(_K2_WITH_CUDA ON)
+set(_K2_WITH_CUDA OFF)
 
 find_program(K2_HAS_NVCC nvcc)
 if(NOT K2_HAS_NVCC AND "$ENV{CUDACXX}" STREQUAL "")
