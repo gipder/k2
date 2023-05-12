@@ -1045,7 +1045,6 @@ def get_rnnt_logprobs_pruned(
     assert rnnt_type in ["regular", "modified", "constrained"], rnnt_type
 
     normalizers = torch.logsumexp(logits, dim=3)
-
     symbols_with_terminal = torch.cat(
         (
             symbols,
@@ -1204,6 +1203,8 @@ def rnnt_loss_pruned(
         rnnt_type=rnnt_type,
     )
 
+    #print(px)
+    #print(py)
     if delay_penalty > 0.0:
         B, S, T0 = px.shape
         T = T0 if rnnt_type != "regular" else T0 - 1
