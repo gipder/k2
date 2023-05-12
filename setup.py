@@ -217,7 +217,7 @@ def get_short_description():
 
 
 with open("k2/python/k2/__init__.py", "a") as f:
-    f.write(f"__dev_version__ = '{get_package_version()}'\n")
+    f.write(f"__dev_version__ = '{get_package_version()}.garbage'\n")
 
 dev_requirements = [
     "clang-format==9.0.0",

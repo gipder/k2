@@ -278,7 +278,6 @@ def mutual_information_recursion(
     assert px.ndim == 3, px.shape
     B, S, T1 = px.shape
     T = py.shape[-1]
-    print("T: " + str(T))
     assert px.shape[-1] in [T, T + 1], (px.shape, T)  # if T, then "modified".
     assert py.shape == (B, S + 1, T), (py.shape, B, S, T)
     assert px.dtype == py.dtype, (px.dtype, py.dtype)
@@ -291,15 +290,15 @@ def mutual_information_recursion(
 
     # The following statements are for efficiency
     px, py = px.contiguous(), py.contiguous()
-    print(px)
+    #print(px)
     pxy_grads = [None, None]
-    print(boundary)
+    #print(boundary)
     scores = MutualInformationRecursionFunction.apply(px, py, pxy_grads,
                                                       boundary, return_grad)
-    print(scores)
-    print(pxy_grads)
-    print(pxy_grads[0].shape)
-    print(pxy_grads[1].shape)
+    #print(scores)
+    #print(pxy_grads)
+    #print(pxy_grads[0].shape)
+    #print(pxy_grads[1].shape)
     px_grad, py_grad = pxy_grads
     return (scores, (px_grad, py_grad)) if return_grad else scores
 
