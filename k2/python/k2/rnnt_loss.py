@@ -1247,6 +1247,7 @@ def rnnt_loss_pruned(
     rnnt_type: str = "regular",
     delay_penalty: float = 0.0,
     reduction: Optional[str] = "mean",
+    topk: int = 1,
 ) -> Tensor:
     """A RNN-T loss with pruning, which uses the output of a pruned 'joiner'
     network as input, i.e. a 4 dimensions tensor with shape (B, T, s_range, C),
@@ -1329,6 +1330,9 @@ def rnnt_loss_pruned(
         ).reshape(1, 1, T0)
         penalty = penalty * delay_penalty
         px += penalty.to(px.dtype)
+    if topk > 1:
+        px = px / topk
+        py = py / topk
 
     negated_loss = mutual_information_recursion(px=px, py=py, boundary=boundary)
     if reduction == "none":
